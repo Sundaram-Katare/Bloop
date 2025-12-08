@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import { TaskStatus } from '../types/task';
+import { toast } from 'sonner';
 
 interface AddTaskFormProps {
   defaultStatus: TaskStatus;
@@ -36,6 +37,7 @@ export default function AddTaskForm({
     setError('');
     try {
       await onSubmit({ title: title.trim(), description: description.trim(), status });
+      toast.success("Task column modifid successfully");
       if (!initialTitle && !initialDescription) {
         setTitle('');
         setDescription('');
