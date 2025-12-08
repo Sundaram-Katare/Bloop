@@ -41,13 +41,13 @@ export default function TaskCard({ task, onUpdate, onDelete }: TaskCardProps) {
                     <div className="flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                         <button
                             onClick={() => setEditing(true)}
-                            className="rounded px-1 text-[10px] text-slate-300 hover:bg-slate-800"
+                            className="rounded px-1 text-[10px] text-slate-300 cursor-pointer hover:bg-slate-800"
                         >
                             Edit
                         </button>
                         <button
                             onClick={() => onDelete(task.id)}
-                            className="rounded px-1 text-[10px] text-red-300 hover:bg-red-900/40"
+                            className="rounded px-1 text-[10px] text-red-300 cursor-pointer hover:bg-red-900/40"
                         >
                             Delete
                         </button>

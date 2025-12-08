@@ -48,15 +48,15 @@ export default function AddTaskForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 rounded-lg bg-slate-900/70 p-3">
+    <form onSubmit={handleSubmit} className="space-y-3 rounded-lg bg-slate-950/70 p-3">
       <input
-        className="w-full rounded border border-slate-700 bg-slate-800 px-2 py-1 text-sm outline-none focus:border-indigo-500"
+        className="w-full rounded border border-slate-700 bg-black px-2 py-1 text-sm outline-none focus:border-green-500"
         placeholder="Task title"
         value={title}
         onChange={e => setTitle(e.target.value)}
       />
       <textarea
-        className="w-full rounded border border-slate-700 bg-slate-800 px-2 py-1 text-sm outline-none focus:border-indigo-500"
+        className="w-full rounded border border-slate-700 bg-black px-2 py-1 text-sm outline-none focus:border-green-500"
         placeholder="Description (optional)"
         rows={3}
         value={description}
@@ -67,7 +67,7 @@ export default function AddTaskForm({
         <button
           type="submit"
           disabled={loading}
-          className="rounded bg-indigo-600 px-3 py-1 text-xs font-medium hover:bg-indigo-500 disabled:opacity-60"
+          className="rounded bg-white px-3 py-1 text-black text-xs font-semibold hover:bg-gray-400 cursor-pointer disabled:opacity-60"
         >
           {loading ? 'Saving...' : submitLabel}
         </button>
@@ -75,7 +75,7 @@ export default function AddTaskForm({
           <button
             type="button"
             onClick={onCancel}
-            className="text-xs text-slate-400 hover:text-slate-200"
+            className="text-xs text-slate-400 hover:text-slate-200 cursor-pointer"
           >
             Cancel
           </button>

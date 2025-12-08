@@ -70,13 +70,13 @@ export default function Board() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 font-poppins ">
       <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-slate-50">
+          <h1 className="text-xl md:text-4xl text-center mb-2 font-semibold text-slate-50">
             Task Management Board
           </h1>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-center md:text-lg text-slate-400">
             Drag tasks between columns to track progress.
           </p>
         </div>
@@ -88,7 +88,7 @@ export default function Board() {
         </p>
       ) : (
         <DndContext onDragEnd={handleDragEnd}>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3 md:mt-16">
             {initialColumns.map(col => (
               <div
                 key={col.status}
