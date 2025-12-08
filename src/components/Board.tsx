@@ -79,11 +79,6 @@ export default function Board() {
           <p className="text-sm text-center md:text-lg text-slate-400">
             Drag tasks between columns to track progress.
           </p>
-
-          <p className='text-white text-xs bg-red-800/80 mt-2 px-1 py-0 md:px-2 md:py-1 rounded-xl text-center '>
-            <span className=' text-white font-semibold'>NOTE:- </span>
-            Double tap on "Edit" and "Delete" button to work properly. 
-          </p>
         </div>
       </header>
 
