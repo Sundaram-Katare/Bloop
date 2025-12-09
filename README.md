@@ -3,7 +3,7 @@
 A modern, responsive Kanban-style task board built with Next.js 15, TypeScript, and Tailwind CSS. Manage your tasks across different stages with smooth drag-and-drop functionality.
 
 🔗 **[Live Demo](https://kanban-board-chi-wine.vercel.app/)**  
-🎥 **[Video Walkthrough](https://your-loom-video-link)**
+🎥 **[Video Walkthrough](https://www.loom.com/share/79f248fd7e7442fcb873e92d6e3e4bae)**
 
 ---
 
