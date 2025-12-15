@@ -42,14 +42,11 @@ A modern, responsive Kanban-style task board built with Next.js 15, TypeScript, 
 
 ## 🛠️ Tech Stack Explanation
 
-**Next.js 15 (App Router)** 
-**TypeScript** 
-
-**Tailwind CSS**
-
-**ShadCN** 
-
-**dnd-kit** 
+- **Next.js 15 (App Router)** 
+- **TypeScript** 
+- **Tailwind CSS**
+- **ShadCN** 
+- **dnd-kit** 
 ---
 
 ## 🧑‍🤝‍🧑 Contributing
