@@ -1,10 +1,8 @@
-# Kanban Task Management Board
+# Bloop - Kanban Task Management Board
 
 A modern, responsive Kanban-style task board built with Next.js 15, TypeScript, and Tailwind CSS. Manage your tasks across different stages with smooth drag-and-drop functionality.
 
 🔗 **[Live Demo](https://kanban-board-chi-wine.vercel.app/)**  
-🎥 **[Video Walkthrough](https://www.loom.com/share/79f248fd7e7442fcb873e92d6e3e4bae)**
-
 ---
 
 ## ✨ Features
@@ -17,7 +15,7 @@ A modern, responsive Kanban-style task board built with Next.js 15, TypeScript, 
 
 ---
 
-## 🚀 Setup Instructions
+## 🚀Local Setup Instructions
 
 ### Installation
 
@@ -38,40 +36,90 @@ A modern, responsive Kanban-style task board built with Next.js 15, TypeScript, 
  npm run dev
 ```
 
-5. **Navigate to localhost://3000**
-
----
-
+5. **Navigate to `localhost://3000**`
 
 ---
 
 ## 🛠️ Tech Stack Explanation
 
-**Next.js 15 (App Router):** Chose Next.js for its built-in optimization, server-side rendering capabilities, and excellent developer experience with the new App Router providing better performance and cleaner routing structure.
+**Next.js 15 (App Router)** 
+**TypeScript** 
 
-**TypeScript:** Ensures type safety throughout the application, reducing runtime errors and improving code maintainability and readability.
+**Tailwind CSS**
 
-**Tailwind CSS:** Enables rapid UI development with utility-first classes and for styling the UI.
+**ShadCN** 
 
-**ShadCN** Used the `sonner` component of shadCN library to get a toast message on adding or deleting the tasks.
+**dnd-kit** 
+---
 
-**dnd-kit:** Selected over react-beautiful-dnd because it's actively maintained, has better TypeScript support, and provides more flexibility for custom drag-and-drop interactions.
+## 🧑‍🤝‍🧑 Contributing
 
-**localStorage:** Provides instant data persistence without backend setup, making the app functional immediately while maintaining simplicity for the assignment scope.
+Thank you for considering contributing to **Bloop**! Whether you're fixing bugs, improving the UI, or adding new features — your contributions are highly appreciated. ❤️
 
 ---
 
-## 🤖 AI Tool Usage
+### 📌 Start with Issues
 
-**ChatGPT & Claude:** Used for understanding dnd-kit documentation, and debugging TypeScript type issues. Also used for optimizing Tailwind CSS utility classes and suggesting best practices for React hooks.
+Before jumping in, head over to the [**Issues**](../../issues) section of this repository.
 
-**Key Note:** All AI-generated code was reviewed, understood, and modified to fit the specific requirements and maintain clean code standards.
+✅ I’ve already created multiple issues that are ready to be picked up.  
+🗨️ If you find an issue you'd like to work on, **comment** on it saying:  
+`I want to work on this issue.`  
+Then, you can start working on it. Once done, You can raise the PR for it.
+
+✨ You’re also welcome to raise **new issues** if you spot a bug or have an idea for improvement — just make sure to provide enough context!
 
 ---
 
-##  Known Issue
+### 🚀 How to Contribute
 
-**localStorage Limitations:** Data is stored only in the browser's localStorage, meaning tasks won't sync across different devices or browsers. Future enhancement could implement a backend API with database storage.
+Follow these steps to contribute to the project:
+
+1. **Fork** this repository by clicking the **Fork** button on the top right.
+2. **Clone** your forked repo to your local machine:
+
+   ```bash
+   git clone https://github.com/your-username/bloop.git
+   cd bloop
+   ```
+3. Create a new branch for your feature or fix:
+```bash
+  git checkout -b your-feature-name
+```
+
+4. Make your changes in the codebase.
+5. Stage and commit your changes:
+```bash
+git add .
+git commit -m "feat: meaningful commit message"
+```
+6. Push your branch to your GitHub fork:
+```bash
+git push origin your-feature-name
+```
+
+7. Raise a Pull Request from your fork to the main branch of this repo.
+Go to your fork on GitHub → Click Compare & pull request → Fill the PR form and submit.
+
+---
+
+## 📝 Tips for a Great Contribution
+- Keep pull requests focused on one issue or feature.
+- Add clear and concise commit messages.
+- Share screenshots or video demos for UI changes (if applicable).
+   
+## 🙌 Thank You
+
+Every contribution, no matter how small, brings value to this project and helps others learn.
+Let’s build something awesome together! 🚀
+
+---
+
+## 🙋‍♂️ Maintainer
+Sundaram Katare
+Connect on:-
+- Linkedin = https://www.linkedin.com/in/sundaram-katare5/
+- Twitter = https://x.com/sundaramkatare
 
 ---
 
