@@ -66,6 +66,8 @@ Then, you can start working on it. Once done, You can raise the PR for it.
 
 ✨ You’re also welcome to raise **new issues** if you spot a bug or have an idea for improvement — just make sure to provide enough context!
 
+🛑Note:- If you face any problem in understanding the description on any pre-rasied issue, you can simply ask me.🛑 
+
 ---
 
 ### 🚀 How to Contribute
