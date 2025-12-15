@@ -74,7 +74,7 @@ export default function Board() {
       <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div className='flex flex-col justify-center items-start'>
           <h1 className="text-xl md:text-4xl text-center mb-2 font-semibold text-slate-50">
-            Task Management Board
+            Bloop - Task Management Board
           </h1>
           <p className="text-sm text-center md:text-lg text-slate-400">
             Drag tasks between columns to track progress.
