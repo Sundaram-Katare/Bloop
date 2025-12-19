@@ -1,10 +1,23 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { useEffect, useState, useCallback } from 'react';
+import { 
+  DndContext, 
+  DragEndEvent, 
+  DragStartEvent,
+  DragOverEvent,
+  DragOverlay,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  closestCorners,
+} from '@dnd-kit/core';
+import { arrayMove } from '@dnd-kit/sortable';
 import { Task, TaskStatus } from '../types/task';
 import { loadTasks, saveTasks } from '../lib/storage';
 import Column from './Column';
+import TaskCard from './TaskCard';
+import { motion } from 'framer-motion';
 
 const initialColumns: { status: TaskStatus; title: string }[] = [
   { status: 'todo',        title: 'To Do' },
@@ -15,6 +28,17 @@ const initialColumns: { status: TaskStatus; title: string }[] = [
 export default function Board() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeTask, setActiveTask] = useState<Task | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+        delay: 100,
+        tolerance: 5,
+      },
+    })
+  );
 
   useEffect(() => {
     const t = loadTasks();
@@ -51,23 +75,71 @@ export default function Board() {
     setTasks(prev => prev.filter(task => task.id !== id));
   }
 
-  function handleDragEnd(event: DragEndEvent) {
+  const handleDragStart = useCallback((event: DragStartEvent) => {
+    const { active } = event;
+    const task = tasks.find(t => t.id === active.id);
+    if (task) {
+      setActiveTask(task);
+    }
+  }, [tasks]);
+
+  const handleDragOver = useCallback((event: DragOverEvent) => {
     const { active, over } = event;
+    
+    if (!over) return;
+    
+    const activeId = active.id as string;
+    const overId = over.id as string;
+    
+    if (activeId === overId) return;
+    
+    const activeTask = tasks.find(t => t.id === activeId);
+    const overTask = over.data.current?.task;
+    
+    if (!activeTask) return;
+    
+    // If dragging over another task
+    if (overTask && activeTask.status === overTask.status) {
+      setTasks(prev => {
+        const oldIndex = prev.findIndex(t => t.id === activeId);
+        const newIndex = prev.findIndex(t => t.id === overId);
+        
+        return arrayMove(prev, oldIndex, newIndex);
+      });
+    }
+  }, [tasks]);
+
+  const handleDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event;
+    setActiveTask(null);
+    
     if (!over) return;
 
     const activeId = active.id as string;
     const overId = over.id as string;
-    if (activeId === overId) return;
 
-    const columnStatus = over.data.current?.columnStatus as TaskStatus | undefined;
-    if (!columnStatus) return;
+    // Check if dropped over a column directly
+    let targetStatus = over.data.current?.columnStatus as TaskStatus | undefined;
+    
+    // If not dropped over a column, check if dropped over a task
+    if (!targetStatus && over.data.current?.task) {
+      targetStatus = over.data.current.task.status as TaskStatus;
+    }
+    
+    if (!targetStatus) return;
 
-    setTasks(prev =>
-      prev.map(task =>
-        task.id === activeId ? { ...task, status: columnStatus } : task,
-      ),
-    );
-  }
+    const activeTask = tasks.find(t => t.id === activeId);
+    if (!activeTask) return;
+
+    // If moving to a different column
+    if (activeTask.status !== targetStatus) {
+      setTasks(prev =>
+        prev.map(task =>
+          task.id === activeId ? { ...task, status: targetStatus, updatedAt: new Date().toISOString() } : task,
+        ),
+      );
+    }
+  }, [tasks]);
 
   return (
     <div className="space-y-4 font-poppins ">
@@ -87,8 +159,14 @@ export default function Board() {
           Loading tasks...
         </p>
       ) : (
-        <DndContext onDragEnd={handleDragEnd}>
-          <div className="grid gap-4 md:grid-cols-3 md:mt-16">
+        <DndContext 
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragStart={handleDragStart}
+          onDragOver={handleDragOver}
+          onDragEnd={handleDragEnd}
+        >
+          <div className="grid gap-4 md:grid-cols-3 md:mt-16 items-start">
             {initialColumns.map(col => (
               <div
                 key={col.status}
@@ -107,6 +185,40 @@ export default function Board() {
               </div>
             ))}
           </div>
+          
+          <DragOverlay dropAnimation={{
+            duration: 300,
+            easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+          }}>
+            {activeTask ? (
+              <motion.div
+                initial={{ scale: 1, rotate: 0, opacity: 0.8 }}
+                animate={{ 
+                  scale: 1.08, 
+                  rotate: 4,
+                  opacity: 1,
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.5)"
+                }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 25,
+                }}
+                className="cursor-grabbing"
+                style={{
+                  transformOrigin: 'center',
+                }}
+              >
+                <div className="opacity-90">
+                  <TaskCard
+                    task={activeTask}
+                    onUpdate={() => {}}
+                    onDelete={() => {}}
+                  />
+                </div>
+              </motion.div>
+            ) : null}
+          </DragOverlay>
         </DndContext>
       )}
     </div>

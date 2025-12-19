@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import SortableTaskItem from './SortableTaskItem';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface ColumnProps {
   status: TaskStatus;
@@ -33,9 +34,12 @@ export default function Column({
   });
 
   return (
-    <div
+    <motion.div
       ref={setNodeRef}
-      className="flex h-full min-h-[200px] flex-col rounded-2xl bg-gradient-to-br from-green-600/70 to-green-900/90 p-4 shadow-lg transition-all duration-300 hover:shadow-2xl"
+      className="flex min-h-[200px] flex-col rounded-2xl bg-linear-to-br from-green-600/70 to-green-900/90 p-4 shadow-lg transition-all duration-300 hover:shadow-2xl"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       {/* Header */}
       <div className="mb-3 flex items-center justify-between">
@@ -57,7 +61,7 @@ export default function Column({
 
       {/* Add Task Form */}
       {showForm && (
-        <div className="mb-3 animate-fade-in">
+        <div className="mb-3">
           <AddTaskForm
             defaultStatus={status}
             onSubmit={data => {
@@ -81,9 +85,9 @@ export default function Column({
         items={tasks.map(t => t.id)}
         strategy={verticalListSortingStrategy}
       >
-        <div className="mt-2 flex flex-1 flex-col gap-3 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-900">
+        <div className="mt-2 flex flex-1 flex-col gap-3 min-h-[50px]">
           {tasks.map(task => (
-            <SortableTaskItem key={task.id} id={task.id}>
+            <SortableTaskItem key={task.id} id={task.id} task={task}>
               <TaskCard
                 task={task}
                 onUpdate={onUpdateTask}
@@ -93,6 +97,6 @@ export default function Column({
           ))}
         </div>
       </SortableContext>
-    </div>
+    </motion.div>
   );
 }
